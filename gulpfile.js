@@ -6,10 +6,10 @@ var notify = require('gulp-notify');
 var minifycss = require('gulp-minify-css');
 var concat = require('gulp-concat');
 var plumber = require('gulp-plumber');
-var browserSync = require('browser-sync');
-var reload = browserSync.reload;
 var prefix = require('gulp-autoprefixer');
 var sourcemaps = require('gulp-sourcemaps');
+var browserSync = require('browser-sync');
+var reload = browserSync.reload;
 
 /* Setup scss path */
 var paths = {
@@ -32,17 +32,31 @@ gulp.task('scripts', function() {
 });
 
 /* Sass task */
+// gulp.task('sass-style', function () {
+//     return sass('_/sass/style.scss', {sourcemap: true})
+//         .on('error', function (err) {
+//             console.error('Error!', err.message);
+//         })
+//         .pipe(plumber())
+//         .pipe(sourcemaps.write())
+//         .pipe(gulp.dest('_/css'))
+//         .pipe(rename({suffix: '.min'}))
+//         .pipe(minifycss())
+//         .pipe(gulp.dest('_/components/css'));
+// });
+
+/* Sass for style*/
 gulp.task('sass-style', function () {
-    return sass('_/sass/style.scss', {sourcemap: true})
+    return sass('_/sass/style.scss', {container: 'gulp-ruby-sass-style'})
         .on('error', function (err) {
             console.error('Error!', err.message);
         })
-        .pipe(plumber())
-        .pipe(sourcemaps.write())
-        .pipe(gulp.dest('_/css'))
-        .pipe(rename({suffix: '.min'}))
-        .pipe(minifycss())
-        .pipe(gulp.dest('_/components/css'));
+       .pipe(plumber())
+       .pipe(sourcemaps.write())
+       .pipe(gulp.dest('_/css'))
+       .pipe(rename({suffix: '.min'}))
+       .pipe(minifycss())
+       .pipe(gulp.dest('_/components/css'));
 });
 
 /* Sass for bootstrap*/
@@ -51,7 +65,7 @@ gulp.task('sass-bootstrap', function () {
         .on('error', function (err) {
             console.error('Error!', err.message);
         })
-        .pipe(plumber())
+       .pipe(plumber())
        .pipe(sourcemaps.write())
        .pipe(gulp.dest('_/css'))
        .pipe(rename({suffix: '.min'}))
