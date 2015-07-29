@@ -37,23 +37,26 @@ gulp.task('sass-style', function () {
         .on('error', function (err) {
             console.error('Error!', err.message);
         })
+        .pipe(plumber())
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest('_/css'));
+        .pipe(gulp.dest('_/css'))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(minifycss())
+        .pipe(gulp.dest('_/components/css'));
 });
-// gulp.task('sass-style', function () {
-//     return sass('_/sass/style.scss', {container: 'gulp-ruby-sass-style'})
-//         .on('error', function (err) {
-//             console.error('Error!', err.message);
-//         })
-//         .pipe(gulp.dest('_/css'));
-// });
 
+/* Sass for bootstrap*/
 gulp.task('sass-bootstrap', function () {
     return sass('_/sass/bootstrap.scss', {container: 'gulp-ruby-sass-bootstrap'})
         .on('error', function (err) {
             console.error('Error!', err.message);
         })
-        .pipe(gulp.dest('_/css'));
+        .pipe(plumber())
+       .pipe(sourcemaps.write())
+       .pipe(gulp.dest('_/css'))
+       .pipe(rename({suffix: '.min'}))
+       .pipe(minifycss())
+       .pipe(gulp.dest('_/components/css'));
 });
 
 gulp.task('sass', ['sass-style', 'sass-bootstrap']);
