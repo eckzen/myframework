@@ -1,6 +1,5 @@
 var gulp = require('gulp'); 
 var sass = require('gulp-ruby-sass'); 
-// var sass = require('gulp-sass');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var notify = require('gulp-notify');
@@ -38,7 +37,7 @@ gulp.task('sass-style', function () {
         .on('error', function (err) {
             console.error('Error!', err.message);
         })
-        .pipe(gulp.dest('_/css/style'));
+        .pipe(gulp.dest('_/css'));
 });
 
 gulp.task('sass-bootstrap', function () {
@@ -46,53 +45,10 @@ gulp.task('sass-bootstrap', function () {
         .on('error', function (err) {
             console.error('Error!', err.message);
         })
-        .pipe(gulp.dest('_/css/bootstrap'));
+        .pipe(gulp.dest('_/css'));
 });
 
 gulp.task('sass', ['sass-style', 'sass-bootstrap']);
-// gulp.task('sass', function () {  
-//     gulp.src([
-//         '_/sass/style.scss',
-//         '_/sass/bootstrap.scss'
-//     ])
-//     .pipe(plumber())
-//     .pipe(prefix('last 2 versions'))
-//     .pipe(concat('style.css'))
-//     .pipe(gulp.dest('_/css/'))
-//     .pipe(browserSync.stream());
-   
-
-//     gulp.task('sass', function () {
-//       gulp.src('_/sass/*.scss')
-//         .pipe(sass().on('error', sass.logError))
-//         .pipe(sourcemaps.init())
-//           .pipe(sass())
-//         .pipe(sourcemaps.write('./maps'))
-//         .pipe(gulp.dest('_/css'));
-//     });
-     
-//     gulp.task('sass:watch', function () {
-//       gulp.watch('_/sass/*.scss', ['sass']);
-//     });
-
-   
-      
-    // .pipe(sass({
-    //     includePaths: ['sass'].concat/*(neat)*/
-    // }))
-    // .pipe(gulp.dest('_/css/style.css'))
-    // .pipe(rename({suffix: '.min'}))
-    // .pipe(minifycss())
-    // .pipe(gulp.dest('_/components/css'))
-    // /* Reload the browser CSS after every change */
-    // .pipe(reload({stream:true}));
-// });
-
-// gulp.task('sass:watch', function () {
-//   gulp.watch('./sass/style.scss', ['sass']);
-// });
-
-
 
 /* Reload task */
 gulp.task('bs-reload', function () {
