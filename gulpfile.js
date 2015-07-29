@@ -33,12 +33,20 @@ gulp.task('scripts', function() {
 
 /* Sass task */
 gulp.task('sass-style', function () {
-    return sass('_/sass/style.scss', {container: 'gulp-ruby-sass-style'})
+    return sass('_/sass/style.scss', {sourcemap: true})
         .on('error', function (err) {
             console.error('Error!', err.message);
         })
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest('_/css'));
 });
+// gulp.task('sass-style', function () {
+//     return sass('_/sass/style.scss', {container: 'gulp-ruby-sass-style'})
+//         .on('error', function (err) {
+//             console.error('Error!', err.message);
+//         })
+//         .pipe(gulp.dest('_/css'));
+// });
 
 gulp.task('sass-bootstrap', function () {
     return sass('_/sass/bootstrap.scss', {container: 'gulp-ruby-sass-bootstrap'})
