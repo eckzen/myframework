@@ -1,5 +1,6 @@
-var gulp = require('gulp');  
-var sass = require('gulp-sass');
+var gulp = require('gulp'); 
+var sass = require('gulp-ruby-sass'); 
+// var sass = require('gulp-sass');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var notify = require('gulp-notify');
@@ -9,6 +10,7 @@ var plumber = require('gulp-plumber');
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 var prefix = require('gulp-autoprefixer');
+var sourcemaps = require('gulp-sourcemaps');
 
 /* Setup scss path */
 var paths = {
@@ -31,15 +33,50 @@ gulp.task('scripts', function() {
 });
 
 /* Sass task */
-gulp.task('sass', function () {  
-    gulp.src('_/sass/style.scss')
-    .pipe(plumber())
-    .pipe(prefix('last 2 versions'))
-    .pipe(concat('style.css'))
-    .pipe(gulp.dest('_/css/'))
-    .pipe(browserSync.stream());
+gulp.task('sass-style', function () {
+    return sass('_/sass/style.scss', {container: 'gulp-ruby-sass-style'})
+        .on('error', function (err) {
+            console.error('Error!', err.message);
+        })
+        .pipe(gulp.dest('_/css/style'));
+});
+
+gulp.task('sass-bootstrap', function () {
+    return sass('_/sass/bootstrap.scss', {container: 'gulp-ruby-sass-bootstrap'})
+        .on('error', function (err) {
+            console.error('Error!', err.message);
+        })
+        .pipe(gulp.dest('_/css/bootstrap'));
+});
+
+gulp.task('sass', ['sass-style', 'sass-bootstrap']);
+// gulp.task('sass', function () {  
+//     gulp.src([
+//         '_/sass/style.scss',
+//         '_/sass/bootstrap.scss'
+//     ])
+//     .pipe(plumber())
+//     .pipe(prefix('last 2 versions'))
+//     .pipe(concat('style.css'))
+//     .pipe(gulp.dest('_/css/'))
+//     .pipe(browserSync.stream());
    
 
+//     gulp.task('sass', function () {
+//       gulp.src('_/sass/*.scss')
+//         .pipe(sass().on('error', sass.logError))
+//         .pipe(sourcemaps.init())
+//           .pipe(sass())
+//         .pipe(sourcemaps.write('./maps'))
+//         .pipe(gulp.dest('_/css'));
+//     });
+     
+//     gulp.task('sass:watch', function () {
+//       gulp.watch('_/sass/*.scss', ['sass']);
+//     });
+
+   
+      
     // .pipe(sass({
     //     includePaths: ['sass'].concat/*(neat)*/
     // }))
@@ -49,7 +86,7 @@ gulp.task('sass', function () {
     // .pipe(gulp.dest('_/components/css'))
     // /* Reload the browser CSS after every change */
     // .pipe(reload({stream:true}));
-});
+// });
 
 // gulp.task('sass:watch', function () {
 //   gulp.watch('./sass/style.scss', ['sass']);

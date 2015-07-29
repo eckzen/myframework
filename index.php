@@ -10,8 +10,17 @@
 
 </head>
 <body>
-	
-	
+	<div class="container-fluid">
+	<section class="row">
+	<div class="col col-lg-8">
+	<h1>Hello Renren?!!!</h1>
+	</div>
+	<div class="col col-lg-4">
+	<h1>Happy Birthday anak!!!!</h1>
+	</div>
+
+	</section>
+	</div>
 
 
 
