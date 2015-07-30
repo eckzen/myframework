@@ -72,6 +72,10 @@ gulp.task('browser-sync', function() {
     });
 });
 
+browserSync({
+   online: false
+});
+
 /* Watch scss, js and html files, doing different things with each. */
 gulp.task('default', ['sass', 'browser-sync'], function () {
     /* Watch scss, run the sass task on change. */
