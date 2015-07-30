@@ -39,23 +39,7 @@ gulp.task('sass', function () {
     .pipe(gulp.dest('_/css/'))
     .pipe(browserSync.stream());
    
-
-    // .pipe(sass({
-    //     includePaths: ['sass'].concat/*(neat)*/
-    // }))
-    // .pipe(gulp.dest('_/css/style.css'))
-    // .pipe(rename({suffix: '.min'}))
-    // .pipe(minifycss())
-    // .pipe(gulp.dest('_/components/css'))
-    // /* Reload the browser CSS after every change */
-    // .pipe(reload({stream:true}));
 });
-
-// gulp.task('sass:watch', function () {
-//   gulp.watch('./sass/style.scss', ['sass']);
-// });
-
-
 
 /* Reload task */
 gulp.task('bs-reload', function () {
