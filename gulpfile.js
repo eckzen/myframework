@@ -11,7 +11,6 @@ var reload = browserSync.reload;
 var prefix = require('gulp-autoprefixer');
 var imagemin = require('gulp-imagemin');
 var pngquant = require('imagemin-pngquant');
-// var cache = require('gulp-cache');
 
 /* Setup scss path */
 var paths = {
@@ -54,11 +53,6 @@ gulp.task('images', function () {
         }))
         .pipe(gulp.dest('_/components/images'));
 });
-// gulp.task('images', function() {
-//   return gulp.src('images/*')
-//     .pipe(cache(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true })))
-//     .pipe(gulp.dest('_/components/img'));
-// });
 
 /* Reload task */
 gulp.task('bs-reload', function () {
