@@ -9,6 +9,9 @@ var plumber = require('gulp-plumber');
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 var prefix = require('gulp-autoprefixer');
+var imagemin = require('gulp-imagemin');
+var cache = require('gulp-cache');
+// var pngquant = require('imagemin-pngquant');
 
 /* Setup scss path */
 var paths = {
@@ -41,6 +44,13 @@ gulp.task('sass', function () {
    
 });
 
+/* Image Compression */
+gulp.task('images', function() {
+  return gulp.src('images/*')
+    .pipe(cache(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true })))
+    .pipe(gulp.dest('_/components/img'));
+});
+
 /* Reload task */
 gulp.task('bs-reload', function () {
     browserSync.reload();
@@ -61,11 +71,13 @@ browserSync({
 });
 
 /* Watch scss, js and html files, doing different things with each. */
-gulp.task('default', ['sass', 'browser-sync'], function () {
+gulp.task('default', ['images', 'sass', 'browser-sync'], function () {
     /* Watch scss, run the sass task on change. */
     gulp.watch(['_/sass/*.scss', '_/sass/**/*.scss'], ['sass'])
     /* Watch app.js file, run the scripts task on change. */
     gulp.watch(['_/js/myscript.js'], ['scripts'])
+    /* Watch .html files, run the bs-reload task on change. */
+    gulp.watch(['images/*'], ['images'])
     /* Watch .html files, run the bs-reload task on change. */
     gulp.watch(['*.php'], ['bs-reload']);
 });

@@ -4,13 +4,16 @@
   "description": "my front end dev framework",
   "main": "gulpfile.js",
   "dependencies": {
-    "gulp": "^3.9.0"
+    "gulp": "^3.9.0",
+    "imagemin-pngquant": "^4.1.2"
   },
   "devDependencies": {
     "browser-sync": "^2.8.0",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^2.3.1",
+    "gulp-cache": "^0.2.10",
     "gulp-concat": "^2.6.0",
+    "gulp-imagemin": "^2.3.0",
     "gulp-minify-css": "^1.2.0",
     "gulp-notify": "^2.2.0",
     "gulp-plumber": "^1.0.1",
